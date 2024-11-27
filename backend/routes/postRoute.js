@@ -1,7 +1,8 @@
 import { Router } from "express";
 import {
     getAllPosts,
-    createPost
+    createPost,
+    likePost
 } from "../controllers/postController.js";
 import authenticateUser from "../middlewares/authenticateUser.js";
 const router = Router();
@@ -13,10 +14,12 @@ const router = Router();
 router.route("/add").post(authenticateUser,createPost);
 
 // Route to get all posts (global view)
-router.get("/all", getAllPosts);
 
+router.route("/all").get(authenticateUser,getAllPosts);
 // Route to update a specific post by ID
 //router.put("/:id", updatePost);
+// Define the route to like a post
+router.route("/like").post(authenticateUser, likePost);
 
 // Route to delete a specific post by ID
 //router.delete("/:id", deletePost);

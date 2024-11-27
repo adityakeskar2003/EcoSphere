@@ -29,12 +29,16 @@ export const EcoPulse = () => {
         // Fetch posts data from API
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/v1/posts/all'); // Update with your backend API URL
+                const response = await axios.get('http://localhost:3000/api/v1/posts/all', {
+                    withCredentials: true, // Make sure cookies are sent with the request
+                });
+        
                 setPosts(response.data);
             } catch (error) {
                 console.error("Error fetching posts: ", error);
             }
         };
+        
 
         fetchPosts();
     }, []);

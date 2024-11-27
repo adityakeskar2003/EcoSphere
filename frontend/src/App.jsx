@@ -47,6 +47,9 @@ import SignIn from './pages/sign-in.jsx';
 import PublicRoutes from './components/Guards/PublicRoutes.jsx';
 import Home from './pages/Home.jsx';
 import ProtectedRoutes from './components/Guards/ProtectedRoutes.jsx';
+import EcoLearnVideo from './components/EcoLearn/EcoLearnVideo.jsx';
+import EcoLearnCourses from './components/EcoLearn/EcoLearnCourses.jsx';
+import EcoLearnArticles from './components/EcoLearn/EcoLearnArticles.jsx';
 import NotFound from './pages/NotFound.jsx';
 
 function App() {
@@ -71,6 +74,9 @@ function App() {
         <Route path="/dashboard" element={<ProtectedRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/dashboard/eco-learn" element={<EcoLearn />} />
+          <Route path="/dashboard/eco-learn/video" element={<EcoLearnVideo />} />
+          <Route path="/dashboard/eco-learn/course" element={<EcoLearnCourses />} />
+          <Route path="/dashboard/eco-learn/article" element={<EcoLearnArticles />} />
           <Route path="/dashboard/eco-lab" element={<EcoLab />} />
           <Route path="/dashboard/eco-lab/details" element={<DetailPage />} />
           <Route path="/dashboard/eco-games" element={<EcoGames />} />

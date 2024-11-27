@@ -35,6 +35,14 @@ export const postApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    likePost: builder.mutation({
+      query: ({ postId, isLiked }) => ({
+        url: `${POSTS_URL}/like`,
+        method: "POST",
+        body: { postId, isLiked }, // Include both postId and isLiked flag
+      }),
+    }),
+    
   }),
 });
 
@@ -44,4 +52,5 @@ export const {
   useUpdatePostMutation,
   useDeletePostMutation,
   useGetPostQuery,
+  useLikePostMutation, // Export the useLikePostMutation hook
 } = postApiSlice;

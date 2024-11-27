@@ -17,7 +17,7 @@ const authenticateUser = asyncHandler(async (req, res, next) => {
       }
       req.user = user
       req.userEmail = user.email;
-      console.log("hiaehfiahe" , user);
+      
 
       next();
     } catch (error) {

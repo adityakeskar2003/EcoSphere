@@ -37,8 +37,9 @@ export const registerUser = asyncHandler(async (req, res) => {
   }
 
   const hashedPassword = await generateHash(password);
-
-  const newUser = new User({ username, email, password: hashedPassword });
+  const vector_init = Array(10).fill(0.1);
+  
+  const newUser = new User({ username, email, password: hashedPassword ,vector:vector_init});
 
   await newUser.save();
 

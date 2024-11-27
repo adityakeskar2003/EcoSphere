@@ -61,7 +61,7 @@ export function MessageDialog() {
 
   return (
     <div>
-      <Button onClick={handleOpen} color="green" className="mt-4">
+      <Button onClick={handleOpen} color="red" className="mt-0">
         Add Post
       </Button>
 

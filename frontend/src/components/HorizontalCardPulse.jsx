@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from "react";
-import {
-  Card,
-  CardBody,
-  Typography,
-  IconButton,
-} from "@material-tailwind/react";
+import { Card, CardBody, Typography, IconButton } from "@material-tailwind/react";
+import { formatDistanceToNow, formatDistanceToNowStrict } from "date-fns";
+import { useLikePostMutation } from "../features/api/apiSlices/postApiSlice"; // Import the useLikePostMutation hook
 
 export function HorizontalCard({ post }) {
   const [isClicked, setIsClicked] = useState(false);
+  const [likePost] = useLikePostMutation(); // Hook to trigger the like post mutation
   const [dateTime, setDateTime] = useState(new Date());
-
+  
+  const [likeCount,setLikeCount]=useState(post.likesCount);
   useEffect(() => {
     const timer = setInterval(() => setDateTime(new Date()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const handleButtonClick = () => {
-    setIsClicked(!isClicked);
+  const handleButtonClick = async () => {
+    try {
+      if (!isClicked) {
+        // Liking the post
+        await likePost({ postId: post._id, isLiked: true }).unwrap();
+        setLikeCount(likeCount + 1); // Increase like count
+      } else {
+        // Disliking the post
+        await likePost({ postId: post._id, isLiked: false }).unwrap();
+        setLikeCount(likeCount - 1); // Decrease like count
+      }
+  
+      setIsClicked(!isClicked); // Toggle like state after successful API call
+    } catch (error) {
+      console.error("Error liking/disliking post:", error);
+    }
   };
+  
 
   return (
     <div className="relative w-screen max-w-screen-xl">
@@ -26,32 +40,31 @@ export function HorizontalCard({ post }) {
           {/* Profile Image and Post Title */}
           <div className="flex items-center mb-4">
             <div className="w-10 h-10 shrink-0 mr-3">
-              {/* Placeholder for profile image, you can replace it with actual image if available */}
+              {/* Placeholder for profile image */}
               <img
                 className="rounded-full"
-                src="/path/to/default_image.png" // You can dynamically set the user image here
+                src={post.user?.profileImage || ""} // Dynamically set the user image here
                 width="40"
                 height="40"
                 alt="author"
               />
             </div>
             <Typography variant="h6" color="gray" className="uppercase">
-              User: {post.user || "Anonymous"}
+              {post.user?.username || "Anonymous"}
             </Typography>
           </div>
 
-          <Typography variant="h4" color="blue-gray" className="mb-2">
-            Post ID: {post.postId || "Unknown Post"}
-          </Typography>
-
+          {/* Post Content */}
           <Typography color="gray" className="mb-8 font-normal">
             {post.content || "No content available."}
           </Typography>
 
-          {/* Display likes */}
-          <Typography color="green" className="font-medium">
-            Likes: {post.likes || 0}
-          </Typography>
+          {/* Likes count */}
+          <div className="flex items-center">
+            <Typography color="gray" className="mr-2">
+              {likeCount} {likeCount === 1 ? "like" : "likes"}
+            </Typography>
+          </div>
         </CardBody>
       </Card>
 
@@ -77,7 +90,9 @@ export function HorizontalCard({ post }) {
 
       {/* Date/Time Display */}
       <div className="absolute bottom-4 right-4 dark:bg-gray-800 text-gray-700 dark:text-gray-200 px-4 py-2 rounded opacity-75">
-        {new Date(post.date).toLocaleString() || dateTime.toLocaleString()}
+        {post.date
+          ? `${formatDistanceToNowStrict(new Date(post.date))} ago`
+          : "Just now"}
       </div>
     </div>
   );

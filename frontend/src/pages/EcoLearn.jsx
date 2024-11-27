@@ -49,21 +49,7 @@ const EcoLearn = () => {
 
 {/* Courses Section */}
 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  <Link to="/dashboard/education/courses">
-    <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
-      <img
-        className="w-full h-40 object-fill"
-        src={Courses}
-        alt="Courses"
-      />
-      <div className="p-4">
-        <h3 className="text-xl font-semibold mb-2">Courses</h3>
-        <p>Explore various courses to enhance your financial knowledge.</p>
-      </div>
-    </div>
-  </Link>
-
-        <Link to="/dashboard/education/videos">
+        <Link to="/dashboard/eco-learn/video">
           <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
             <img
               className="w-full content-fill h-40 "
@@ -72,12 +58,24 @@ const EcoLearn = () => {
             />
             <div className="p-4">
               <h3 className="text-xl font-semibold mb-2">Videos</h3>
-              <p>Watch informative videos on financial management and planning.</p>
+              <p>Watch informative videos on climate action, green energy, and environmental conservation.</p>
             </div>
           </div>
         </Link>
-
-        <Link to="/dashboard/education/articles">
+        <Link to="/dashboard/eco-learn/course">
+    <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
+      <img
+        className="w-full h-40 object-fill"
+        src={Courses}
+        alt="Courses"
+      />
+      <div className="p-4">
+        <h3 className="text-xl font-semibold mb-2">Courses</h3>
+        <p>Explore various courses to deepen your understanding of environmental sustainability and climate science.</p>
+      </div>
+    </div>
+  </Link>
+        <Link to="/dashboard/eco-learn/course">
           <div className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 hover:shadow-lg">
             <img
               className="w-full h-40 object-cover"
@@ -86,7 +84,7 @@ const EcoLearn = () => {
             />
             <div className="p-4">
               <h3 className="text-xl font-semibold mb-2">Articles and News</h3>
-              <p>Read articles to stay updated with the latest financial trends.</p>
+              <p>Read articles to stay updated with the latest climate change trends and solutions.</p>
             </div>
           </div>
         </Link>
